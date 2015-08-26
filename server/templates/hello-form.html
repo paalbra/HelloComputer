@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="/hello">
+	<label>Computer ID: <input type="text" name="computer_name"></label>
+	<label>Secret: <input type="password" name="secret"></label>
+	<input type="submit" value="Submit">
+</form>
+{% endblock %}

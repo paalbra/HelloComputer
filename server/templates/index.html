@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Hello, {{ ipaddress }}!</p>
+<p><a href="{{ url_for('hello') }}">Say hello</a></p>
+{% endblock %}
