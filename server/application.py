@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-	return render_template("index.html", ipaddress=request.remote_addr)
+	return render_template("index.html", ipaddress=get_client_ip())
 
 @app.route("/hello", methods=["GET", "POST"])
 def hello():
@@ -34,8 +34,12 @@ def get_computer(computer_name, secret):
 def get_database_connection():
 	return sqlite3.connect("sqlite3.db")
 
+def get_client_ip():
+	# Get the IP from the X-Forwarded-For header if present. Fallback to remote_addr.
+	return request.headers.get("x-forwarded-for", request.remote_addr).split(", ")[0]
+
 def update_computer(computer_id):
-	ip_address = request.remote_addr
+	ip_address = get_client_ip()
 	with get_database_connection() as con:
 		con.execute("INSERT INTO hello(computer_id, ipaddress) VALUES(?, ?)", (computer_id, ip_address))
 
