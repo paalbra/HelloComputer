@@ -1,3 +1,4 @@
 server/sqlite3.db
 client/hello-server.ini
-
+*.pyc
+venv
